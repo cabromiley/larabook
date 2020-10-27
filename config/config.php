@@ -11,7 +11,7 @@ return [
     'routes' => [
         'alias' => 'documentation.',
         'prefix' => 'documentation',
-        'middleware' => [],
+        'middleware' => ['web'],
     ],
     'cache' => [
         'enabled' => false,

@@ -2,7 +2,9 @@
 
 namespace Cabromiley\Larabook;
 
+use Cabromiley\Larabook\Http\Livewire\DocumentationComponent;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class LarabookServiceProvider extends ServiceProvider
 {
@@ -18,6 +20,8 @@ class LarabookServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'larabook');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
+
+        Livewire::component('larabook-documentation', DocumentationComponent::class);
 
         if ($this->app->runningInConsole()) {
             $this->publishes([

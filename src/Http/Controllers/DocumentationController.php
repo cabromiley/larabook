@@ -20,8 +20,8 @@ class DocumentationController extends Controller
     {
         $components = Larabook::getComponents();
 
-        $currentComponent = $components->firstWhere('name', '=', $component);
+        $component = $components->firstWhere('name', '=', $component);
 
-        return view('larabook::documentation.show', $currentComponent);
+        return view('larabook::documentation.show', compact('component'));
     }
 }

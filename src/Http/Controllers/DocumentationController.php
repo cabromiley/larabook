@@ -3,19 +3,25 @@
 
 namespace Cabromiley\Larabook\Http\Controllers;
 
-
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\Yaml\Yaml;
+use \Larabook;
 
 class DocumentationController extends Controller
 {
     public function index($component = null)
     {
-        $components = collect(Storage::disk(config('larabook.storage.driver'))->allFiles(config('larabook.storage.directory')))
-            ->map(fn ($file) => Yaml::parse(Storage::disk(config('larabook.storage.driver'))->get($file)));
+        $components = Larabook::getComponents();
 
         $currentComponent = $components->firstWhere('name', '=', $component);
 
         return view('larabook::documentation.index', compact('components', 'currentComponent'));
+    }
+
+    public function show($component)
+    {
+        $components = Larabook::getComponents();
+
+        $currentComponent = $components->firstWhere('name', '=', $component);
+
+        return view('larabook::documentation.show', $currentComponent);
     }
 }

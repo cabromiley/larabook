@@ -6,11 +6,15 @@
 return [
     'storage' => [
         'driver' => 'local',
-        'directory' => 'documentation'
+        'directory' => 'documentation',
     ],
     'routes' => [
         'alias' => 'documentation.',
         'prefix' => 'documentation',
-        'middleware' => []
+        'middleware' => [],
+    ],
+    'cache' => [
+        'enabled' => false,
+        'key' => 'documentation_components',
     ]
 ];

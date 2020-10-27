@@ -2,6 +2,7 @@
 
 namespace Cabromiley\Larabook;
 
+use Cabromiley\Larabook\Console\LaraBookGenerate;
 use Cabromiley\Larabook\Http\Livewire\DocumentationComponent;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -48,7 +49,9 @@ class LarabookServiceProvider extends ServiceProvider
             ], 'lang');*/
 
             // Registering package commands.
-            // $this->commands([]);
+            $this->commands([
+                LaraBookGenerate::class,
+            ]);
         }
     }
 

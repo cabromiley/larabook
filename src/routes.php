@@ -11,4 +11,3 @@ Route::group([
     Route::get('/', [ DocumentationController::class, 'index' ])->name('index');
     Route::get('{component}', [ DocumentationController::class, 'index' ])->name('show');
 });
-

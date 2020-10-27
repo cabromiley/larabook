@@ -36,7 +36,7 @@ class LarabookServiceProvider extends ServiceProvider
 
             $this->publishes([
                 __DIR__.'/../resources/documentation' => public_path('storage/app/documentation')
-            ]);
+            ], 'documentation');
 
             // Publishing the translation files.
             /*$this->publishes([

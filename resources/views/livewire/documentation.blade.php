@@ -116,6 +116,11 @@
                     </form>
                 </div>
                 <div class="ml-4 flex items-center md:ml-6">
+                    @isset($componentName)
+                        <a href="{{ route(config('larabook.routes.alias').'show', $componentName) }}" target="_blank" class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
+                            <x-larabook::icons.eye />
+                        </a>
+                    @endisset
                     <button wire:click="setDisplaySize('mobile')" class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
                         <x-larabook::icons.device-mobile />
                     </button>
@@ -150,10 +155,6 @@
                                         <span>{{$displaySize[0]}}x{{ $displaySize[1] }}</span>
                                     @endif
                                 </div>
-
-                                <a href="{{ route(config('larabook.routes.alias').'show', $componentName) }}" target="_blank" class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
-                                    <x-larabook::icons.eye />
-                                </a>
                             </div>
                             <iframe class="{{ $displaySize[0] === 1920 ? '' : 'border-2' }} w-full h-full border-gray-400 mx-auto" src="{{ route(config('larabook.routes.alias').'show', $componentName) }}" frameborder="0"></iframe>
                         @endisset

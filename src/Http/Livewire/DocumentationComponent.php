@@ -11,6 +11,8 @@ class DocumentationComponent extends Component
 {
     public $component = null;
 
+    public $displaySize = [ 1920, 1080 ];
+
     public function render()
     {
         $components = Larabook::getComponents();
@@ -23,5 +25,20 @@ class DocumentationComponent extends Component
     public function setComponent($name)
     {
         $this->component = $name;
+    }
+
+    public function setDisplaySize($size)
+    {
+        if ($size === 'desktop') {
+            $this->displaySize = [ 1920, 1080 ];
+            return;
+        }
+
+        if ($size === 'tablet') {
+            $this->displaySize = [ 728, 1024 ];
+            return;
+        }
+
+        $this->displaySize = [ 375, 667 ];
     }
 }

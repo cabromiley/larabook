@@ -116,10 +116,16 @@
                     </form>
                 </div>
                 <div class="ml-4 flex items-center md:ml-6">
-                    <button class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
-                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                        </svg>
+                    <button wire:click="setDisplaySize('mobile')" class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
+                        <x-larabook::icons.device-mobile />
+                    </button>
+
+                    <button wire:click="setDisplaySize('tablet')" class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
+                        <x-larabook::icons.device-tablet />
+                    </button>
+
+                    <button wire:click="setDisplaySize('desktop')" class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
+                        <x-larabook::icons.device-desktop />
                     </button>
                 </div>
             </div>
@@ -134,11 +140,16 @@
                         <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
                     @endisset
                 </div>
-                <div>
+                <div class="flex items-center justify-center">
                     <!-- Replace with your content -->
-                    <div class="py-4">
+                    <div class="py-4" style="width: {{ $displaySize[0] }}px; height: {{ $displaySize[1] }}px; max-width: 100%; max-height: 100%;" class="mx-auto">
                         @isset($componentName)
-                            <iframe class="w-full h-screen mx-auto px-4 sm:px-6 md:px-8" src="{{ route(config('larabook.routes.alias').'show', $componentName) }}" frameborder="0"></iframe>
+                            <div>
+                                @if($displaySize[0] !== 1920)
+                                    <div>{{$displaySize[0]}}x{{ $displaySize[1] }}</div>
+                                @endif
+                            </div>
+                            <iframe class="{{ $displaySize[0] === 1920 ? '' : 'border-2' }} w-full h-full border-gray-400 mx-auto" src="{{ route(config('larabook.routes.alias').'show', $componentName) }}" frameborder="0"></iframe>
                         @endisset
                     </div>
                     <!-- /End replace -->

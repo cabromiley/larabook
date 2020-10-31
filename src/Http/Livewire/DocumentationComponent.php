@@ -9,11 +9,14 @@ use \Larabook;
 
 class DocumentationComponent extends Component
 {
+    public string $openTab = '';
+
     public ?string $component = null;
 
     public array $displaySize = [null, null];
 
     protected $queryString = ['component', 'displaySize'];
+
 
     public function render()
     {
@@ -32,6 +35,16 @@ class DocumentationComponent extends Component
     public function setDisplaySize($size)
     {
         $this->displaySize = $size;
+    }
+
+    public function toggleTab($tab)
+    {
+        if ($this->openTab === $tab) {
+            $this->openTab = '';
+            return;
+        }
+
+        $this->openTab = $tab;
     }
 
     public function getViewportCssProperty()

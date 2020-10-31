@@ -117,8 +117,8 @@
                 </div>
                 <div class="ml-4 flex items-center md:ml-6">
                     @isset($componentName)
-                        <a href="{{ route(config('larabook.routes.alias').'show', $componentName) }}" target="_blank" class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
-                            <x-larabook::icons.eye class="mx-4" />
+                        <a href="{{ route(config('larabook.routes.alias').'show', $componentName) }}" target="_blank" class="p-1 mx-4 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
+                            <x-larabook::icons.eye />
                         </a>
                     @endisset
 

@@ -16,5 +16,8 @@ return [
     'cache' => [
         'enabled' => false,
         'key' => 'documentation_components',
+    ],
+    'session' => [
+        'component_props_key' => 'larabook::current_component'
     ]
 ];

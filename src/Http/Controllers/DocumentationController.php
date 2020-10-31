@@ -23,8 +23,13 @@ class DocumentationController extends Controller
 
         $component = $components->firstWhere('name', '=', $component);
 
-        $attributes = request()->all();
-        $attributes['attributes'] = new ComponentAttributeBag(request()->all());
+        $componentPropsKey = config('larabook.session.component_props_key', 'larabook::current_component');
+
+        $attributes = collect(session()->get($componentPropsKey, []))
+            ->merge(request()->all())
+            ->toArray();
+
+        $attributes['attributes'] = new ComponentAttributeBag($attributes);
 
         return view('larabook::documentation.show', compact('component', 'attributes'));
     }

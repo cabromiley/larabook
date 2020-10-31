@@ -13,6 +13,8 @@ class DocumentationComponent extends Component
 
     public array $displaySize = [null, null];
 
+    protected $queryString = ['component', 'displaySize'];
+
     public function render()
     {
         $components = Larabook::getComponents();

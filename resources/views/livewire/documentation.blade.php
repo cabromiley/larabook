@@ -1,6 +1,6 @@
 <div class="h-screen flex overflow-hidden bg-gray-100">
     <x-larabook::sidebar :items="$components" />
-    <div class="flex flex-col w-0 flex-1 overflow-hidden">
+    <div class="flex flex-col w-0 flex-1 h-screen overflow-hidden relative">
         <x-larabook::topbar>
             @isset($componentName)
                 <a href="{{ route(config('larabook.routes.alias').'show', $componentName) }}" target="_blank" class="p-1 mx-4 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
@@ -57,5 +57,15 @@
                 @endisset
             </div>
         </x-larabook::main-panel>
+
+        <x-larabook::bottom-bar>
+            <x-larabook::tabs.item :active="false">
+                Props
+            </x-larabook::tabs.item>
+
+            <x-larabook::tabs.item :active="false">
+                Actions
+            </x-larabook::tabs.item>
+        </x-larabook::bottom-bar>
     </div>
 </div>

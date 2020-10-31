@@ -3,6 +3,7 @@
 
 namespace Cabromiley\Larabook\Http\Controllers;
 
+use Illuminate\View\ComponentAttributeBag;
 use \Larabook;
 
 class DocumentationController extends Controller
@@ -22,6 +23,9 @@ class DocumentationController extends Controller
 
         $component = $components->firstWhere('name', '=', $component);
 
-        return view('larabook::documentation.show', compact('component'));
+        $attributes = request()->all();
+        $attributes['attributes'] = new ComponentAttributeBag(request()->all());
+
+        return view('larabook::documentation.show', compact('component', 'attributes'));
     }
 }

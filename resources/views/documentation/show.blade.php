@@ -1,1 +1,3 @@
-<x-dynamic-component :component="$component['name']" />
+@component('components.'.$component['name'], $attributes)
+
+@endcomponent

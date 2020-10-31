@@ -43,15 +43,13 @@
         </x-larabook::topbar>
 
         <x-larabook::main-panel>
-            <h1 class="text-2xl font-semibold text-gray-900 mx-8">{{ $componentName ?? 'Dashboard' }}</h1>
-            <div class="px-4 py-4 w-full h-screen mx-auto" style="{{ $this->viewportCss }}">
+            <x-larabook::header :title="$componentName ?? 'Dashboard'" :component="$componentName ?? ''"></x-larabook::header>
+            <div class="w-full h-full mx-auto" style="{{ $this->viewportCss }}">
                 @isset($componentName)
-                    <div class="flex justify-between">
-                        <div>
-                            @if($displaySize[0])
-                                <span>{{$displaySize[0]}}x{{ $displaySize[1] }}</span>
-                            @endif
-                        </div>
+                    <div>
+                        @if($displaySize[0])
+                            <span>{{$displaySize[0]}}x{{ $displaySize[1] }}</span>
+                        @endif
                     </div>
                     <iframe class="{{ $displaySize[0] ? 'border-2' : '' }} w-full h-full border-gray-400 mx-auto" src="{{ route(config('larabook.routes.alias').'show', $componentName) }}" frameborder="0"></iframe>
                 @endisset

@@ -9,9 +9,9 @@ use \Larabook;
 
 class DocumentationComponent extends Component
 {
-    public $component = null;
+    public ?string $component = null;
 
-    public $displaySize = [ 1920, 1080 ];
+    public array $displaySize = [null, null];
 
     public function render()
     {
@@ -29,16 +29,6 @@ class DocumentationComponent extends Component
 
     public function setDisplaySize($size)
     {
-        if ($size === 'desktop') {
-            $this->displaySize = [ 1920, 1080 ];
-            return;
-        }
-
-        if ($size === 'tablet') {
-            $this->displaySize = [ 728, 1024 ];
-            return;
-        }
-
-        $this->displaySize = [ 375, 667 ];
+        $this->displaySize = $size;
     }
 }

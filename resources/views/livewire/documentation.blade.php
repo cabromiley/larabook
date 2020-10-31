@@ -118,45 +118,41 @@
                 <div class="ml-4 flex items-center md:ml-6">
                     @isset($componentName)
                         <a href="{{ route(config('larabook.routes.alias').'show', $componentName) }}" target="_blank" class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
-                            <x-larabook::icons.eye />
+                            <x-larabook::icons.eye class="mx-4" />
                         </a>
                     @endisset
-                    <button wire:click="setDisplaySize('mobile')" class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
-                        <x-larabook::icons.device-mobile />
-                    </button>
 
-                    <button wire:click="setDisplaySize('tablet')" class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
-                        <x-larabook::icons.device-tablet />
-                    </button>
-
-                    <button wire:click="setDisplaySize('desktop')" class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500" aria-label="Notifications">
-                        <x-larabook::icons.device-desktop />
-                    </button>
+                    <x-larabook::dropdown title="Viewport">
+                        <x-larabook::dropdown.item wire:click="setDisplaySize([ null, null ])" @click="open = false">Reset</x-larabook::dropdown.item>
+                        <x-larabook::dropdown.item wire:click="setDisplaySize([ 375, 667 ])" @click="open = false"><x-larabook::icons.device-mobile class="inline-block"/>375x667</x-larabook::dropdown.item>
+                        <x-larabook::dropdown.item wire:click="setDisplaySize([ 728, 1024 ])" @click="open = false"><x-larabook::icons.device-tablet class="inline-block"/> 728x1024</x-larabook::dropdown.item>
+                        <x-larabook::dropdown.item wire:click="setDisplaySize([ 1920, 1080 ])" @click="open = false"><x-larabook::icons.device-desktop class="inline-block"/> 1920x1080</x-larabook::dropdown.item>
+                    </x-larabook::dropdown>
                 </div>
             </div>
         </div>
 
         <main class="flex-1 relative overflow-y-hidden focus:outline-none" tabindex="0">
             <div class="pt-2 pb-6 md:py-6">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                <div class="max-w-7xl md:mx-8 mx-4">
                     @isset($componentName)
                         <h1 class="text-2xl font-semibold text-gray-900">{{ $componentName }}</h1>
                     @else
                         <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
                     @endisset
                 </div>
-                <div class="flex items-center justify-center">
+                <div class="px-4">
                     <!-- Replace with your content -->
-                    <div class="py-4" style="width: {{ $displaySize[0] }}px; height: {{ $displaySize[1] }}px; max-width: 100%; max-height: 100%;" class="mx-auto">
+                    <div class="py-4 w-full h-screen" style="@if($displaySize[0])width: {{ $displaySize[0] }}px;@endif @if($displaySize[1]) height: {{ $displaySize[1] }}px; @endif">
                         @isset($componentName)
                             <div class="flex justify-between">
                                 <div>
-                                    @if($displaySize[0] !== 1920)
+                                    @if($displaySize[0])
                                         <span>{{$displaySize[0]}}x{{ $displaySize[1] }}</span>
                                     @endif
                                 </div>
                             </div>
-                            <iframe class="{{ $displaySize[0] === 1920 ? '' : 'border-2' }} w-full h-full border-gray-400 mx-auto" src="{{ route(config('larabook.routes.alias').'show', $componentName) }}" frameborder="0"></iframe>
+                            <iframe class="{{ $displaySize[0] ? 'border-2' : '' }} w-full h-full border-gray-400 mx-auto" src="{{ route(config('larabook.routes.alias').'show', $componentName) }}" frameborder="0"></iframe>
                         @endisset
                     </div>
                     <!-- /End replace -->

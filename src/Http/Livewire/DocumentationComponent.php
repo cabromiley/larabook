@@ -31,4 +31,18 @@ class DocumentationComponent extends Component
     {
         $this->displaySize = $size;
     }
+
+    public function getViewportCssProperty()
+    {
+        $css = '';
+
+        if ($this->displaySize[0]) {
+            $css .= "width: {$this->displaySize[0]}px; ";
+        }
+        if ($this->displaySize[1]) {
+            $css .= "height: {$this->displaySize[1]}px";
+        }
+
+        return $css;
+    }
 }

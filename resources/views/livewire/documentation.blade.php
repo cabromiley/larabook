@@ -44,7 +44,7 @@
 
         <x-larabook::main-panel>
             <h1 class="text-2xl font-semibold text-gray-900 mx-8">{{ $componentName ?? 'Dashboard' }}</h1>
-            <div class="px-4 py-4 w-full h-screen" style="@if($displaySize[0])width: {{ $displaySize[0] }}px;@endif @if($displaySize[1]) height: {{ $displaySize[1] }}px; @endif">
+            <div class="px-4 py-4 w-full h-screen mx-auto" style="{{ $this->viewportCss }}">
                 @isset($componentName)
                     <div class="flex justify-between">
                         <div>

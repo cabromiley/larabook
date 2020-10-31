@@ -2,7 +2,7 @@
     'title' => 'Dashboard',
     'component' => ''
 ])
-<div class="mx-4 md:mx-8">
+<div class="mx-4 md:mx-8 mb-4">
     <div>
         <nav class="sm:hidden">
             <a href="{{ route(config('larabook.routes.alias').'index') }}" class="flex items-center text-sm leading-5 font-medium text-gray-500 hover:text-gray-700 transition duration-150 ease-in-out">

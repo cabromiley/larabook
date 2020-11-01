@@ -51,7 +51,7 @@
                             <span>{{$displaySize[0]}}x{{ $displaySize[1] }}</span>
                         @endif
                     </div>
-                    <iframe class="{{ $displaySize[0] ? 'border-2' : '' }} w-full h-full border-gray-400 mx-auto" src="{{ route(config('larabook.routes.alias').'show', $componentName) }}" frameborder="0"></iframe>
+                    <iframe x-data x-on:refresh-frame.window="document.querySelector('#component-frame').src += ''; console.log('reloading')" id="component-frame" class="{{ $displaySize[0] ? 'border-2' : '' }} w-full h-full border-gray-400 mx-auto" src="{{ route(config('larabook.routes.alias').'show', $componentName) }}" frameborder="0"></iframe>
                 @endisset
             </div>
         </x-larabook::main-panel>
@@ -76,20 +76,20 @@
                             <div class="mt-3 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
                                 <form @submit.pevent action="#" method="POST">
                                     <x-larabook::grid.row :rows="4" :gap="6">
-                                        @if(is_array($this->component) && is_array($this->component['props']))
+                                        @if(is_array($this->component) && isset($this->component['props']))
                                             @foreach($this->component['props'] as $key => $prop)
                                                 <x-larabook::grid.col :key="$key" :col="1">
                                                     @if($prop['type'] === 'String')
                                                         <x-larabook::form.label :for="$key" :label="$key">
-                                                            <x-larabook::form.input :id="$key" />
+                                                            <x-larabook::form.input :id="$key" :value="$this->props[$key] ?? ''" wire:change="setProps('{{ $key }}', $event.target.value)" />
                                                         </x-larabook::form.label>
                                                     @endif
 
                                                     @if($prop['type'] === 'Enum')
                                                         <x-larabook::form.label :for="$key" :label="$key">
-                                                            <x-larabook::form.select :id="$key">
+                                                            <x-larabook::form.select :id="$key" :value="$this->props[$key] ?? ''" wire:change="setProps('{{ $key }}', $event.target.value)">
                                                                 @foreach($prop['options'] as $option)
-                                                                    <option value="{{ $option }}">{{ $option }}</option>
+                                                                    <option value="{{ $option }}" @if(isset($this->props[$key]) && $option === $this->props[$key]) selected @endif>{{ $option }}</option>
                                                                 @endforeach
                                                             </x-larabook::form.select>
                                                         </x-larabook::form.label>

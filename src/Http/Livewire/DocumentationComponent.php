@@ -23,22 +23,31 @@ class DocumentationComponent extends Component
 
     protected $queryString = ['componentName', 'displaySize'];
 
+    public array $props = [];
+
 
     public function render()
     {
         $componentName = $this->componentName;
+        $this->updateIframe();
 
         return view('larabook::livewire.documentation', compact('componentName'));
     }
 
     public function setComponent($name)
     {
+        $this->reset();
         $this->componentName = $name;
     }
 
     public function setDisplaySize($size)
     {
         $this->displaySize = $size;
+    }
+
+    public function setProps($key, $value)
+    {
+        $this->props[$key] = $value;
     }
 
     public function toggleTab($tab)
@@ -73,5 +82,12 @@ class DocumentationComponent extends Component
     public function getComponentProperty()
     {
         return $this->components->firstWhere('name', '=', $this->componentName) ?? [];
+    }
+
+    public function updateIframe()
+    {
+        $componentPropsKey = config('larabook.session.component_props_key', 'larabook::current_component');
+        session()->put($componentPropsKey, $this->props);
+        $this->dispatchBrowserEvent('refresh-frame');
     }
 }

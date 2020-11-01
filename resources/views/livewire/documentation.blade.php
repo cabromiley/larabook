@@ -61,8 +61,12 @@
                 Props
             </x-larabook::tabs.item>
 
-            <x-larabook::tabs.item :active="$openTab === 'actions'" wire:click="toggleTab('actions')">
-                Actions
+            <x-larabook::tabs.item :active="$openTab === 'prop_types'" wire:click="toggleTab('prop_types')">
+                Prop Types
+            </x-larabook::tabs.item>
+
+            <x-larabook::tabs.item :active="$openTab === 'description'" wire:click="toggleTab('description')">
+                Description
             </x-larabook::tabs.item>
 
             @if($openTab !== '')
@@ -70,7 +74,7 @@
                     <div>
                         @if($openTab === 'props')
                             <div class="mt-3 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
-                                <form action="#" method="POST">
+                                <form @submit.pevent action="#" method="POST">
                                     <x-larabook::grid.row :rows="4" :gap="6">
                                         @if(is_array($this->component) && is_array($this->component['props']))
                                             @foreach($this->component['props'] as $key => $prop)

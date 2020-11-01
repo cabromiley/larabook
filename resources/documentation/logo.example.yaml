@@ -1,0 +1,17 @@
+name: logo
+displayName: logo
+description: ''
+props:
+  colour:
+    type: String
+    default: 'bg-black'
+    placeholder: 'Show Colour'
+    tip: null
+  size:
+    type: Enum
+    options:
+      - sm
+      - md
+      - lg
+      - xl
+    default: md

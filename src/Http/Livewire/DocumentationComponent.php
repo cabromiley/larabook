@@ -4,32 +4,36 @@
 namespace Cabromiley\Larabook\Http\Livewire;
 
 
+use Illuminate\Support\Collection;
 use Livewire\Component;
 use \Larabook;
 
+/**
+ * Class DocumentationComponent
+ * @package Cabromiley\Larabook\Http\Livewire
+ * @property Collection components
+ */
 class DocumentationComponent extends Component
 {
     public string $openTab = '';
 
-    public ?string $component = null;
+    public ?string $componentName = null;
 
     public array $displaySize = [null, null];
 
-    protected $queryString = ['component', 'displaySize'];
+    protected $queryString = ['componentName', 'displaySize'];
 
 
     public function render()
     {
-        $components = Larabook::getComponents();
+        $componentName = $this->componentName;
 
-        $componentName = $this->component;
-
-        return view('larabook::livewire.documentation', compact('components', 'componentName'));
+        return view('larabook::livewire.documentation', compact('componentName'));
     }
 
     public function setComponent($name)
     {
-        $this->component = $name;
+        $this->componentName = $name;
     }
 
     public function setDisplaySize($size)
@@ -59,5 +63,15 @@ class DocumentationComponent extends Component
         }
 
         return $css;
+    }
+
+    public function getComponentsProperty(): Collection
+    {
+        return Larabook::getComponents();
+    }
+
+    public function getComponentProperty()
+    {
+        return $this->components->firstWhere('name', '=', $this->componentName) ?? [];
     }
 }

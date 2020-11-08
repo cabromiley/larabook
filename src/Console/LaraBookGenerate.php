@@ -30,7 +30,7 @@ class LaraBookGenerate extends Command
                 $storage = Storage::disk(config('larabook.storage.driver'));
                 $yaml = <<<YAML
 name: $componentName
-displayName: $componentName
+view: $componentName
 description: ''
 YAML;
 

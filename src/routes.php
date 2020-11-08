@@ -9,5 +9,7 @@ Route::group([
     'as' => config('larabook.routes.alias'),
 ], function () {
     Route::get('/{component?}', [ DocumentationController::class, 'index' ])->name('index');
-    Route::get('/iframe/{component}', [ DocumentationController::class, 'show' ])->name('show');
+    Route::get('/iframe/{component}', [ DocumentationController::class, 'show' ])
+        ->name('show')
+        ->where('component', '.*');
 });

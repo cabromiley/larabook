@@ -76,9 +76,9 @@
                             <div class="mt-3 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
                                 <form @submit.pevent action="#" method="POST">
                                     <x-larabook::grid.row :rows="4" :gap="6">
-                                        @if(is_array($this->component) && isset($this->component['props']))
+                                        @if(is_array($this->component) && isset($this->component['props']) && count($this->component['props']) > 0)
                                             @foreach($this->component['props'] as $key => $prop)
-                                                <x-larabook::grid.col :key="$key" :col="1">
+                                                <x-larabook::grid.col :key="$key" :col="$prop['cols'] ?? 1">
                                                     @if($prop['type'] === 'String')
                                                         <x-larabook::form.label :for="$key" :label="$key">
                                                             <x-larabook::form.input :id="$key" :value="$this->props[$key] ?? ''" wire:change="setProps('{{ $key }}', $event.target.value)" />

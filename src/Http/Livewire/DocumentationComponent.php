@@ -38,6 +38,29 @@ class DocumentationComponent extends Component
     {
         $this->reset();
         $this->componentName = $name;
+
+        $props = $this->component['props'] ?? [];
+
+        foreach($props as $key => $prop) {
+            if (empty($prop['default'])) {
+                $type = strtolower($prop['type'] ?? 'string');
+                if ($type === 'string') {
+                    $this->setProps($key, '');
+                    continue;
+                }
+
+                if ($type === 'number') {
+                    $this->setProps($key, 0);
+                    continue;
+                }
+
+                $this->setProps($key, null);
+                continue;
+            }
+            $this->setProps($key, $prop['default']);
+        }
+
+        $this->updateIframe();
     }
 
     public function setDisplaySize($size)

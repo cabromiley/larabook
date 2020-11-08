@@ -113,4 +113,11 @@ class DocumentationComponent extends Component
         session()->put($componentPropsKey, $this->props);
         $this->dispatchBrowserEvent('refresh-frame');
     }
+
+    public function mount()
+    {
+        if (! empty($this->componentName)) {
+            $this->setComponent($this->componentName);
+        }
+    }
 }

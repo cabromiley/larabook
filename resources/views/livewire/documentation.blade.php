@@ -58,7 +58,7 @@
 
         <x-larabook::bottom-bar>
             <x-larabook::tabs.item :active="$openTab === 'props'" wire:click="toggleTab('props')">
-                Props
+                Controls
             </x-larabook::tabs.item>
 
             <x-larabook::tabs.item :active="$openTab === 'prop_types'" wire:click="toggleTab('prop_types')">
